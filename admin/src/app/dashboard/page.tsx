@@ -1,36 +1,52 @@
-import { getMe } from "@/domains/auth/auth.service";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { DollarSign, ShoppingBag, MessageSquare, Calendar } from 'lucide-react';
 
-export default async function DashboardPage() {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
+const metricCards = [
+  {
+    title: 'Total Sales Today',
+    value: '$1,250',
+    icon: DollarSign,
+    iconBgColor: 'bg-green-500',
+  },
+  {
+    title: 'Orders Pending',
+    value: '12',
+    icon: ShoppingBag,
+    iconBgColor: 'bg-yellow-500',
+  },
+  {
+    title: 'Messages Unread',
+    value: '5',
+    icon: MessageSquare,
+    iconBgColor: 'bg-blue-500',
+  },
+  {
+    title: 'Scheduled Posts',
+    value: '8',
+    icon: Calendar,
+    iconBgColor: 'bg-purple-500',
+  },
+];
 
-  if (!accessToken) {
-    redirect("/login");
-  }
-
-  try {
-    const user = await getMe(accessToken);
-
-    const handleLogout = async () => {
-      'use server';
-      cookieStore.delete("accessToken");
-      redirect("/login");
-    };
-
-    return (
-      <div className="p-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold">Welcome, {user.name}!</h1>
-          <form action={handleLogout}>
-            <button type="submit" className="btn btn-primary">Logout</button>
-          </form>
-        </div>
-        <p>This is the main dashboard content.</p>
+export default function DashboardPage() {
+  return (
+    <div>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {metricCards.map((card) => (
+          <Card key={card.title}>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">{card.title}</CardTitle>
+              <div className={`p-2 rounded-full ${card.iconBgColor}`}>
+                <card.icon className="w-5 h-5 text-white" />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{card.value}</div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
-    );
-  } catch (error) {
-    redirect("/login");
-  }
+      {/* Add other dashboard components here, like Sales Graph, Recent Orders, etc. */}
+    </div>
+  );
 }
