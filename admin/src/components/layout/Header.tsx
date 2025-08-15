@@ -1,125 +1,97 @@
-"use client";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/DropdownMenu";
-import { Input } from "@/components/ui/Input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/Sheet";
-import { Menu, Package2, Search } from "lucide-react";
-import { Button } from "../ui/Button";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import LogoutButton from "@/app/dashboard/LogoutButton";
+'use client'
 
-const navLinks = [
-	{ href: "/dashboard", label: "Dashboard" },
-	{ href: "/dashboard/orders", label: "Orders" },
-	{ href: "/dashboard/products", label: "Products" },
-	{ href: "/dashboard/customers", label: "Customers" },
-	{ href: "/dashboard/analytics", label: "Analytics" },
-];
+import { useState, useEffect } from 'react'
+import { MagnifyingGlassIcon, BellIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
+import { logoutAction } from '@/src/app/actions/auth'
+import { User } from '@/src/shared/types/auth'
+import { getCookie } from '@/src/shared/utils/cookies'
+import { COOKIE_NAMES } from '@/src/shared/utils/cookies'
 
-export function Header() {
-	const pathname = usePathname();
-	return (
-		<header className="flex h-14 items-center gap-4 border-b bg-background px-4 md:px-6">
-			<nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-				<Link
-					href="#"
-					className="flex items-center gap-2 text-lg font-semibold md:text-base"
-				>
-					<Package2 className="h-6 w-6" />
-					<span className="sr-only">ZeeLink</span>
-				</Link>
-				{navLinks.map(link => (
-					<Link
-						key={link.href}
-						href={link.href}
-						className={cn(
-							"transition-colors hover:text-foreground",
-							pathname === link.href
-								? "text-foreground"
-								: "text-muted-foreground",
-						)}
-					>
-						{link.label}
-					</Link>
-				))}
-			</nav>
-			<Sheet>
-				<SheetTrigger asChild>
-					<Button variant="outline" size="icon" className="shrink-0 md:hidden">
-						<Menu className="h-5 w-5" />
-						<span className="sr-only">Toggle navigation menu</span>
-					</Button>
-				</SheetTrigger>
-				<SheetContent side="left">
-					<nav className="grid gap-6 text-lg font-medium">
-						<Link
-							href="#"
-							className="flex items-center gap-2 text-lg font-semibold"
-						>
-							<Package2 className="h-6 w-6" />
-							<span className="sr-only">ZeeLink</span>
-						</Link>
-						{navLinks.map(link => (
-							<Link
-								key={link.href}
-								href={link.href}
-								className={cn(
-									"transition-colors hover:text-foreground",
-									pathname === link.href
-										? "text-foreground"
-										: "text-muted-foreground",
-								)}
-							>
-								{link.label}
-							</Link>
-						))}
-					</nav>
-				</SheetContent>
-			</Sheet>
+const Header = () => {
+  const [user, setUser] = useState<User | null>(null)
 
-			<div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-				<form className="ml-auto flex-1 sm:flex-initial">
-					<div className="relative">
-						<Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-						<Input
-							type="search"
-							placeholder="Search products..."
-							className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-						/>
-					</div>
-				</form>
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<Button variant="secondary" size="icon" className="rounded-full">
-							<Image
-								src="/placeholder.png"
-								width="36"
-								height="36"
-								alt="Avatar"
-								className="rounded-full"
-							/>
-							<span className="sr-only">Toggle user menu</span>
-						</Button>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent align="end">
-						<DropdownMenuLabel>My Account</DropdownMenuLabel>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem>Settings</DropdownMenuItem>
-						<DropdownMenuItem>Support</DropdownMenuItem>
-						<DropdownMenuSeparator />
-						<LogoutButton />
-					</DropdownMenuContent>
-				</DropdownMenu>
-			</div>
-		</header>
-	);
+  useEffect(() => {
+    const loadUser = () => {
+      try {
+        const userCookie = getCookie(COOKIE_NAMES.USER)
+        if (userCookie) {
+          setUser(JSON.parse(userCookie))
+        }
+      } catch (error) {
+        console.error('Failed to load user:', error)
+      }
+    }
+
+    loadUser()
+  }, [])
+
+  const handleLogout = async () => {
+    try {
+      await logoutAction()
+    } catch (error) {
+      console.error('Logout failed:', error)
+    }
+  }
+
+  const getUserInitials = () => {
+    if (!user) return 'U'
+    return `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`
+  }
+
+  return (
+    <header className="navbar bg-base-100 shadow-sm border-b">
+      <div className="navbar-start">
+        <div className="text-xl font-bold text-primary">ZeeLink</div>
+      </div>
+      
+      <div className="navbar-center">
+        <div className="form-control">
+          <div className="input-group">
+            <input 
+              type="text" 
+              placeholder="Search products, posts, customers..." 
+              className="input input-bordered w-80" 
+            />
+            <button className="btn btn-square">
+              <MagnifyingGlassIcon className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div className="navbar-end">
+        <button className="btn btn-ghost btn-circle">
+          <div className="indicator">
+            <BellIcon className="h-5 w-5" />
+            <span className="badge badge-xs badge-primary indicator-item"></span>
+          </div>
+        </button>
+        
+        <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button" className="btn btn-ghost">
+            <div className="avatar">
+              <div className="w-8 rounded-full">
+                <div className="bg-primary text-primary-content w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium">
+                  {getUserInitials()}
+                </div>
+              </div>
+            </div>
+            <ChevronDownIcon className="h-4 w-4" />
+          </div>
+          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <li>
+              <div className="flex flex-col items-start px-4 py-2 border-b">
+                <span className="font-medium">{user ? `${user.firstName} ${user.lastName}` : 'Loading...'}</span>
+                <span className="text-sm text-base-content/60">{user?.email}</span>
+              </div>
+            </li>
+            <li><a href="/settings">Profile & Settings</a></li>
+            <li><a onClick={handleLogout} className="text-error">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+  )
 }
+
+export default Header

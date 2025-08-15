@@ -1,0 +1,223 @@
+
+---
+
+1. Dashboard Layout Structure
+
+Overall Layout
+
+Header (Top Navigation)
+
+Logo (ZeeLink)
+
+Page Title (changes per screen)
+
+Quick Search bar (for products, posts, customers)
+
+Notifications icon (bell)
+
+User menu (profile, settings, logout)
+
+
+Sidebar (Left Navigation)
+
+Dashboard (Overview)
+
+Products (list, add/edit)
+
+Posts (scheduled, drafts, published)
+
+Messages (inbox, tags, auto-replies)
+
+Orders (active, completed, cancelled)
+
+Analytics (sales, engagement, performance)
+
+Settings (account, page connections, billing)
+
+
+Main Content Area
+
+Page header (breadcrumbs, page title, action buttons)
+
+Content cards/tables
+
+Pagination & filters (top-right of lists)
+
+
+Footer (slim, optional)
+
+Copyright & version
+
+
+
+
+---
+
+2. Key Screens & Components
+
+2.1 Dashboard Overview
+
+Top Metrics Cards (4 cards in a row)
+
+Total Sales Today
+
+Orders Pending
+
+Messages Unread
+
+Scheduled Posts
+
+
+Sales Graph (line or bar chart for last 7 days)
+
+Recent Orders Table (5 most recent orders with status)
+
+Recent Messages Preview
+
+Quick Actions (Add Product, Create Post, Tag Messages)
+
+
+
+---
+
+2.2 Products
+
+Products List Table
+
+Thumbnail
+
+Name
+
+Price
+
+Stock
+
+Status (active/draft)
+
+Edit/Delete actions
+
+
+Filters & Search (by category, stock level, status)
+
+Add/Edit Product Screen
+
+Product info form (name, price, description)
+
+Media upload
+
+Variations (optional)
+
+Save & Publish buttons
+
+
+
+
+---
+
+2.3 Posts
+
+Calendar View (monthly/weekly view of scheduled posts)
+
+Posts Table (list view with date/time, status, linked product)
+
+Create/Edit Post
+
+Text editor (caption, hashtags)
+
+Media upload
+
+Scheduling options
+
+Select linked product
+
+
+
+
+---
+
+2.4 Messages
+
+Inbox View
+
+Left pane: list of conversations
+
+Right pane: selected conversation messages
+
+
+Tagging System (color-coded tags like “Order Inquiry”, “VIP Customer”)
+
+Auto-reply Templates (list + edit)
+
+
+
+---
+
+2.5 Orders
+
+Orders Table
+
+Order ID
+
+Customer Name
+
+Date
+
+Status (Pending, Shipped, Delivered, Cancelled)
+
+Total Amount
+
+View Details action
+
+
+Order Details Screen
+
+Order summary
+
+Customer info
+
+Items list
+
+Order status update
+
+
+
+
+---
+
+2.6 Analytics
+
+Charts (sales by day, engagement by post, top products)
+
+KPIs (conversion rate, message response time, best posting time)
+
+
+
+---
+
+2.7 Settings
+
+Account Settings
+
+Connected Pages
+
+Billing & Subscription
+
+Notification Preferences
+
+
+
+---
+
+3. Layout Style
+
+Grid System: 12-column layout (Tailwind grid)
+
+Color Palette: Light base, accent color for active items (e.g., teal or blue)
+
+Typography: Clean, sans-serif (e.g., Inter)
+
+Card-based UI: For metrics, graphs, quick actions
+
+Consistency: All action buttons at top-right, all filters at top
+
+
