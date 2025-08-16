@@ -25,10 +25,10 @@ export class CreateProductDto {
   @IsNotEmpty()
   price: number;
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsUrl()
-  @IsNotEmpty()
-  image_url: string;
+  @IsOptional()
+  image_url?: string;
 
   @ApiProperty({ enum: ProductStatus, required: false })
   @IsEnum(ProductStatus)

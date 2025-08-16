@@ -6,6 +6,7 @@ import {
   PlusIcon
 } from '@heroicons/react/24/outline'
 import MetricCard from "@/components/ui/MetricCard";
+import Avatar from "@/components/ui/Avatar";
 
 export default function Dashboard() {
 	return (
@@ -120,11 +121,7 @@ export default function Dashboard() {
 						<h3 className="card-title mb-4">Recent Messages</h3>
 						<div className="space-y-3">
 							<div className="flex items-start gap-3">
-								<div className="avatar placeholder">
-									<div className="bg-neutral text-neutral-content rounded-full w-8">
-										<span className="text-xs">A</span>
-									</div>
-								</div>
+								<Avatar initials="A" alt="John Doe" size="md" />
 								<div className="flex-1">
 									<p className="text-sm font-medium">Alex Johnson</p>
 									<p className="text-xs text-base-content/60">
@@ -134,11 +131,7 @@ export default function Dashboard() {
 								</div>
 							</div>
 							<div className="flex items-start gap-3">
-								<div className="avatar placeholder">
-									<div className="bg-primary text-primary-content rounded-full w-8">
-										<span className="text-xs">S</span>
-									</div>
-								</div>
+								<Avatar initials="S" alt="Sarah Davis" size="md" />
 								<div className="flex-1">
 									<p className="text-sm font-medium">Sarah Davis</p>
 									<p className="text-xs text-base-content/60">

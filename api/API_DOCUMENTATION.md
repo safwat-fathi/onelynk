@@ -44,7 +44,7 @@ Represents a product that a user can list.
 | `name`        | `string`        | The name of the product.                  |
 | `description` | `string`        | A detailed description of the product.    |
 | `price`       | `number`        | The price of the product.                 |
-| `image_url`   | `string`        | URL to the product's image.               |
+| `image_url`   | `string`  | URL to the product's image (optional).    |
 | `status`      | `ProductStatus` | Availability status (`available`, `out_of_stock`). |
 | `created_at`  | `Date`          | Timestamp of when the product was created.|
 | `updated_at`  | `Date`          | Timestamp of the last update.             |
@@ -128,7 +128,7 @@ This section describes the available API endpoints.
 #### **`POST /products`**
 - **Description:** Creates a new product for the authenticated user.
 - **Authentication:** Bearer Token (Access Token).
-- **Request Body:** `CreateProductDto` (`name`, `description`, `price`, `image_url`, `status?`).
+- **Request Body:** `CreateProductDto` (`name`, `description`, `price`, `image_url?`, `status?`).
 - **Success Response:** `201 Created` with the newly created product object.
 
 #### **`GET /products`**

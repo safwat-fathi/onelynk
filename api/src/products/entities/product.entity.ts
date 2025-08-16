@@ -31,7 +31,7 @@ export class Product {
   @Column()
   price: number;
 
-  @Column()
+  @Column({ nullable: true })
   image_url: string;
 
   @Column({
