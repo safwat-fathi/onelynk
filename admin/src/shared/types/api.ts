@@ -1,16 +1,16 @@
-export interface ApiResponse<T = any> {
+export type ApiResponse<T = unknown> = {
   data: T
   message?: string
   success: boolean
 }
 
-export interface ApiError {
+export type ApiError = {
   message: string
   code?: string
   status?: number
 }
 
-export interface PaginatedResponse<T> {
+export type PaginatedResponse<T> = {
   data: T[]
   pagination: {
     page: number
@@ -20,8 +20,8 @@ export interface PaginatedResponse<T> {
   }
 }
 
-export interface RequestConfig {
+export type RequestConfig = {
   headers?: Record<string, string>
-  params?: Record<string, any>
+  params?: Record<string, unknown>
   withAuth?: boolean
 }

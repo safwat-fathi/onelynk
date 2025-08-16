@@ -246,7 +246,7 @@ export default function MessagesPage() {
             </div>
             <div className="border border-base-300 rounded-lg p-4">
               <h4 className="font-medium mb-2">Product Information</h4>
-              <p className="text-sm text-base-content/70 mb-3">Hello! I'd be happy to provide more information about this product...</p>
+              <p className="text-sm text-base-content/70 mb-3">Hello! I&apos;d be happy to provide more information about this product...</p>
               <button className="btn btn-outline btn-xs">Edit</button>
             </div>
             <div className="border border-base-300 rounded-lg p-4">

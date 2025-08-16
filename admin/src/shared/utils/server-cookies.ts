@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers'
-import { User } from '@/src/shared/types/auth'
+import { User } from '@/shared/types/auth'
 
 export const COOKIE_NAMES = {
   ACCESS_TOKEN: 'access_token',

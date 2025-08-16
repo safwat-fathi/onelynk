@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { MagnifyingGlassIcon, BellIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
-import { logoutAction } from '@/src/app/actions/auth'
-import { User } from '@/src/shared/types/auth'
-import { getCookie } from '@/src/shared/utils/cookies'
-import { COOKIE_NAMES } from '@/src/shared/utils/cookies'
+import { logoutAction } from '@/app/actions/auth'
+import { User } from '@/shared/types/auth'
+import { getCookie } from '@/shared/utils/cookies'
+import { COOKIE_NAMES } from '@/shared/utils/cookies'
 
 const Header = () => {
   const [user, setUser] = useState<User | null>(null)

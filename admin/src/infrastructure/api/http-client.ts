@@ -1,8 +1,8 @@
 'use client'
 
-import { API_BASE_URL, API_ENDPOINTS, HTTP_STATUS } from '@/src/shared/constants/api'
-import { ApiResponse, ApiError, RequestConfig } from '@/src/shared/types/api'
-import { COOKIE_NAMES, getCookie, setCookie, clearAuthCookies } from '@/src/shared/utils/cookies'
+import { API_BASE_URL, API_ENDPOINTS, HTTP_STATUS } from '@/shared/constants/api'
+import { ApiError, RequestConfig } from '@/shared/types/api'
+import { COOKIE_NAMES, getCookie, setCookie, clearAuthCookies } from '@/shared/utils/cookies'
 
 class HttpClient {
   private baseURL: string
@@ -127,7 +127,7 @@ class HttpClient {
 
       if (response.ok) {
         const data = await response.json()
-        const { accessToken, refreshToken: newRefreshToken, expiresIn } = data.tokens || data
+        const { accessToken, refreshToken: newRefreshToken } = data.tokens || data
         
         setCookie(COOKIE_NAMES.ACCESS_TOKEN, accessToken, 1) // 1 day
         if (newRefreshToken) {
@@ -148,7 +148,7 @@ class HttpClient {
     return this.makeRequest<T>(endpoint, { method: 'GET' }, config)
   }
 
-  async post<T>(endpoint: string, data?: any, config?: RequestConfig): Promise<T> {
+  async post<T>(endpoint: string, data?: unknown, config?: RequestConfig): Promise<T> {
     return this.makeRequest<T>(
       endpoint,
       {
@@ -159,7 +159,7 @@ class HttpClient {
     )
   }
 
-  async patch<T>(endpoint: string, data?: any, config?: RequestConfig): Promise<T> {
+  async patch<T>(endpoint: string, data?: unknown, config?: RequestConfig): Promise<T> {
     return this.makeRequest<T>(
       endpoint,
       {
@@ -170,7 +170,7 @@ class HttpClient {
     )
   }
 
-  async put<T>(endpoint: string, data?: any, config?: RequestConfig): Promise<T> {
+  async put<T>(endpoint: string, data?: unknown, config?: RequestConfig): Promise<T> {
     return this.makeRequest<T>(
       endpoint,
       {

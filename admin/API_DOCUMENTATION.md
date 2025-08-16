@@ -5,6 +5,7 @@
 ZeeLink is a comprehensive API that provides a platform for users to showcase their products, share links, and manage a professional portfolio. It serves as a centralized backend for a "link-in-bio" style application, handling user authentication, data storage, and business logic.
 
 Key features include:
+
 - User authentication (signup, login, token refresh).
 - Product management (CRUD operations for user products).
 - Link management (CRUD operations for user-managed links).

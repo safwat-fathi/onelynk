@@ -6,9 +6,10 @@ import {
   LinkIcon,
   CreditCardIcon,
   BellIcon,
-  ShieldCheckIcon,
+
   PlusIcon,
-  TrashIcon
+
+
 } from '@heroicons/react/24/outline'
 
 const connectedPages = [
@@ -65,37 +66,22 @@ export default function SettingsPage() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">First Name</span>
-                    </label>
-                    <input type="text" className="input input-bordered" defaultValue="John" />
+                    <input type="text" placeholder="First Name" className="input input-bordered" defaultValue="John" />
                   </div>
                   <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Last Name</span>
-                    </label>
-                    <input type="text" className="input input-bordered" defaultValue="Doe" />
+                    <input type="text" placeholder="Last Name" className="input input-bordered" defaultValue="Doe" />
                   </div>
                 </div>
 
                 <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Email Address</span>
-                  </label>
-                  <input type="email" className="input input-bordered" defaultValue="john@example.com" />
+                  <input type="email" placeholder="Email Address" className="input input-bordered" defaultValue="john@example.com" />
                 </div>
 
                 <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Company/Store Name</span>
-                  </label>
-                  <input type="text" className="input input-bordered" defaultValue="ZeeLink Store" />
+                  <input type="text" placeholder="Company/Store Name" className="input input-bordered" defaultValue="ZeeLink Store" />
                 </div>
 
                 <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Time Zone</span>
-                  </label>
                   <select className="select select-bordered">
                     <option>UTC-5 (Eastern Time)</option>
                     <option>UTC-6 (Central Time)</option>

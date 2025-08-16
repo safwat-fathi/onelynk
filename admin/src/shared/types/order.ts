@@ -1,4 +1,4 @@
-export interface OrderItem {
+export type OrderItem = {
   id: string
   productId: string
   productName: string
@@ -7,7 +7,7 @@ export interface OrderItem {
   total: number
 }
 
-export interface Order {
+export type Order = {
   id: string
   customerName: string
   customerEmail: string
@@ -18,7 +18,7 @@ export interface Order {
   updatedAt: string
 }
 
-export interface OrderStatusUpdateData {
+export type OrderStatusUpdateData = {
   status: Order['status']
   notes?: string
 }

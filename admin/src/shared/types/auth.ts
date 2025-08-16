@@ -1,4 +1,4 @@
-export interface User {
+export type User = {
   id: string
   email: string
   firstName: string
@@ -8,25 +8,25 @@ export interface User {
   updatedAt: string
 }
 
-export interface LoginCredentials {
+export type LoginCredentials = {
   email: string
   password: string
 }
 
-export interface SignupCredentials {
+export type SignupCredentials = {
   email: string
   password: string
   firstName: string
   lastName: string
 }
 
-export interface AuthTokens {
+export type AuthTokens = {
   accessToken: string
   refreshToken: string
   expiresIn: number
 }
 
-export interface AuthResponse {
+export type AuthResponse = {
   user: User
   tokens: AuthTokens
 }

@@ -3,7 +3,7 @@
 import Header from './Header'
 import Sidebar from './Sidebar'
 
-interface DashboardLayoutProps {
+type DashboardLayoutProps = {
   children: React.ReactNode
 }
 

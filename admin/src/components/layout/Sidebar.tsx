@@ -24,29 +24,29 @@ const Sidebar = () => {
   const pathname = usePathname()
 
   return (
-    <aside className="w-64 min-h-screen bg-base-200">
-      <div className="p-4">
-        <nav className="menu">
-          {menuItems.map((item) => {
-            const Icon = item.icon
-            const isActive = pathname === item.href
-            
-            return (
-              <li key={item.href}>
-                <Link 
-                  href={item.href}
-                  className={`menu-item ${isActive ? 'active' : ''}`}
-                >
-                  <Icon className="h-5 w-5" />
-                  <span>{item.label}</span>
-                </Link>
-              </li>
-            )
-          })}
-        </nav>
-      </div>
-    </aside>
-  )
+		<aside className="w-64 min-h-screen bg-base-200">
+			<div className="p-4">
+				<nav className="menu w-full">
+					{menuItems.map(item => {
+						const Icon = item.icon;
+						const isActive = pathname === item.href;
+
+						return (
+							<li key={item.href} className="w-full">
+								<Link
+									href={item.href}
+									className={`menu-item ${isActive ? "active" : ""}`}
+								>
+									<Icon className="h-5 w-5" />
+									<span>{item.label}</span>
+								</Link>
+							</li>
+						);
+					})}
+				</nav>
+			</div>
+		</aside>
+	);
 }
 
 export default Sidebar

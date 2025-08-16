@@ -1,12 +1,12 @@
-import { httpClient } from '@/src/infrastructure/api/http-client'
-import { API_ENDPOINTS } from '@/src/shared/constants/api'
-import { COOKIE_NAMES, setCookie, getCookie, clearAuthCookies } from '@/src/shared/utils/cookies'
+import { httpClient } from '@/infrastructure/api/http-client'
+import { API_ENDPOINTS } from '@/shared/constants/api'
+import { COOKIE_NAMES, setCookie, getCookie, clearAuthCookies } from '@/shared/utils/cookies'
 import {
   LoginCredentials,
   SignupCredentials,
   AuthResponse,
   User
-} from '@/src/shared/types/auth'
+} from '@/shared/types/auth'
 
 export class AuthService {
   async login(credentials: LoginCredentials): Promise<AuthResponse> {

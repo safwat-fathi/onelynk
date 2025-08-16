@@ -1,4 +1,4 @@
-export interface Product {
+export type Product = {
   id: string
   name: string
   description?: string
@@ -11,7 +11,7 @@ export interface Product {
   updatedAt: string
 }
 
-export interface ProductCreateData {
+export type ProductCreateData = {
   name: string
   description?: string
   price: number
@@ -20,6 +20,6 @@ export interface ProductCreateData {
   image?: string
 }
 
-export interface ProductUpdateData extends Partial<ProductCreateData> {
+export type ProductUpdateData = Partial<ProductCreateData> & {
   status?: 'active' | 'draft' | 'inactive'
 }

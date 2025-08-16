@@ -1,5 +1,6 @@
 {
-	"name": "admin-dashboard",
+	"name": "admin",
+	"description": "Admin dashboard for ZeeLink platform",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
@@ -19,7 +20,7 @@
 		"@eslint/eslintrc": "^3",
 		"@tailwindcss/postcss": "^4.1.11",
 		"@types/node": "^20",
-		"@types/react": "^19",
+		"@types/react": "^19.1.9",
 		"@types/react-dom": "^19",
 		"eslint": "^9",
 		"eslint-config-next": "15.4.6",

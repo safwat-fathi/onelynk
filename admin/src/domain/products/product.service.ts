@@ -1,7 +1,7 @@
-import { httpClient } from '@/src/infrastructure/api/http-client'
-import { API_ENDPOINTS } from '@/src/shared/constants/api'
-import { PaginatedResponse } from '@/src/shared/types/api'
-import { Product, ProductCreateData, ProductUpdateData } from '@/src/shared/types/product'
+import { httpClient } from '@/infrastructure/api/http-client'
+import { API_ENDPOINTS } from '@/shared/constants/api'
+import { PaginatedResponse } from '@/shared/types/api'
+import { Product, ProductCreateData, ProductUpdateData } from '@/shared/types/product'
 
 export class ProductService {
   async getProducts(params?: {

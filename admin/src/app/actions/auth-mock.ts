@@ -1,8 +1,9 @@
 'use server'
 
+import { LoginCredentials, SignupCredentials } from "@/shared/types/auth";
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { LoginCredentials, SignupCredentials } from '@/src/shared/types/auth'
+
 
 // Mock authentication for development
 // Replace this with actual API calls in production

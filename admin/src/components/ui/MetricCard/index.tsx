@@ -1,4 +1,4 @@
-interface MetricCardProps {
+type MetricCardProps = {
   title: string
   value: string | number
   change?: string
