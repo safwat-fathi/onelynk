@@ -1,25 +1,21 @@
 export type Product = {
-  id: string
+  id: number
   name: string
-  description?: string
+  description: string
   price: number
-  stock: number
-  status: 'active' | 'draft' | 'inactive'
-  image?: string
-  category?: string
-  createdAt: string
-  updatedAt: string
+  image_url?: string
+  status: 'available' | 'out_of_stock'
+  created_at: string
+  updated_at: string
 }
 
 export type ProductCreateData = {
   name: string
-  description?: string
+  description: string
   price: number
-  stock: number
-  category?: string
-  image?: string
+  image_url?: string
 }
 
 export type ProductUpdateData = Partial<ProductCreateData> & {
-  status?: 'active' | 'draft' | 'inactive'
+  status?: 'available' | 'out_of_stock'
 }

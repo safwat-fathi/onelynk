@@ -34,24 +34,7 @@ const SearchInput = ({
   const [query, setQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [recentSearches, setRecentSearches] = useLocalStorage<string[]>(localStorageKey, []);
-  const debouncedQuery = useDebounce(query, debounceDelay);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  // Trigger search when debounced query changes
-  useEffect(() => {
-    if (debouncedQuery.trim() !== "") {
-      onSearch(debouncedQuery);
-      
-      // Add to recent searches if not already present
-      setRecentSearches(prev => {
-        const filtered = prev.filter(item => item !== debouncedQuery);
-        return [debouncedQuery, ...filtered].slice(0, 5); // Keep only last 5
-      });
-    } else if (debouncedQuery === "") {
-      // Clear search when query is empty
-      onSearch("");
-    }
-  }, [debouncedQuery, onSearch, setRecentSearches]);
 
   // Handle Enter key submission
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

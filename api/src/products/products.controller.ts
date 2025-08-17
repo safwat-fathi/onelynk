@@ -8,20 +8,24 @@ import {
   Delete,
   UseGuards,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { ProductFilterDto } from './dto/product-filter.dto';
 import {
   ApiBearerAuth,
   ApiTags,
   ApiOperation,
   ApiResponse,
+  ApiQuery,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { GetUser } from 'src/auth/decorators/get-user.decorator';
 import { User } from 'src/users/entities/user.entity';
 import { Product } from './entities/product.entity';
+import { PaginatedProductsDto } from './dto/paginated-products.dto';
 import CONSTANTS from 'src/common/constants';
 
 @ApiTags('products')
@@ -47,14 +51,14 @@ export class ProductsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all products' })
+  @ApiOperation({ summary: 'Get all products with pagination and filters' })
   @ApiResponse({
     status: 200,
-    description: 'Return all products.',
-    type: [Product],
+    description: 'Return all products with pagination and filters.',
+    type: PaginatedProductsDto,
   })
-  findAll(): Promise<Product[]> {
-    return this.productsService.findAll();
+  findAll(@Query() filterDto: ProductFilterDto): Promise<PaginatedProductsDto> {
+    return this.productsService.findAllWithPagination(filterDto);
   }
 
   @Get(':id')

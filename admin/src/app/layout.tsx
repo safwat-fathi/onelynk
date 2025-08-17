@@ -8,8 +8,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ZeeLink Admin Dashboard",
-  description: "Admin dashboard for ZeeLink platform",
+	title: {
+		default: "ZeeLink Dashboard",
+		template: "%s | ZeeLink Dashboard",
+	},
+	description: "Admin dashboard for ZeeLink platform",
 };
 
 export default function RootLayout({

@@ -12,12 +12,10 @@ export type ApiError = {
 
 export type PaginatedResponse<T> = {
   data: T[]
-  pagination: {
-    page: number
-    limit: number
-    total: number
-    totalPages: number
-  }
+  total: number
+  page: number
+  limit: number
+  totalPages: number
 }
 
 export type RequestConfig = {

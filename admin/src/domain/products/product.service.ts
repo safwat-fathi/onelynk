@@ -8,7 +8,6 @@ export class ProductService {
     page?: number
     limit?: number
     search?: string
-    category?: string
     status?: string
   }): Promise<PaginatedResponse<Product>> {
     return httpClient.get<PaginatedResponse<Product>>(
@@ -17,20 +16,20 @@ export class ProductService {
     )
   }
 
-  async getProduct(id: string): Promise<Product> {
-    return httpClient.get<Product>(API_ENDPOINTS.PRODUCTS.BY_ID(id))
+  async getProduct(id: number): Promise<Product> {
+    return httpClient.get<Product>(API_ENDPOINTS.PRODUCTS.BY_ID(id.toString()))
   }
 
   async createProduct(data: ProductCreateData): Promise<Product> {
     return httpClient.post<Product>(API_ENDPOINTS.PRODUCTS.BASE, data)
   }
 
-  async updateProduct(id: string, data: ProductUpdateData): Promise<Product> {
-    return httpClient.patch<Product>(API_ENDPOINTS.PRODUCTS.BY_ID(id), data)
+  async updateProduct(id: number, data: ProductUpdateData): Promise<Product> {
+    return httpClient.patch<Product>(API_ENDPOINTS.PRODUCTS.BY_ID(id.toString()), data)
   }
 
-  async deleteProduct(id: string): Promise<void> {
-    return httpClient.delete<void>(API_ENDPOINTS.PRODUCTS.BY_ID(id))
+  async deleteProduct(id: number): Promise<void> {
+    return httpClient.delete<void>(API_ENDPOINTS.PRODUCTS.BY_ID(id.toString()))
   }
 }
 
