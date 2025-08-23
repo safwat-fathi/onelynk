@@ -5,14 +5,70 @@ import { Product } from "@/shared/types/product";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PaginatedResponse } from "@/shared/types/api";
+import { useEffect, useState } from "react";
 
 interface ProductsDataTableProps {
   productsData: PaginatedResponse<Product>;
+  searchParams?: {
+    search?: string;
+    status?: string;
+    page?: string;
+  };
 }
 
-const ProductsDataTable = ({ productsData }: ProductsDataTableProps) => {
+const ProductsDataTable = ({ productsData: initialProductsData, searchParams }: ProductsDataTableProps) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const urlSearchParams = useSearchParams();
+  const [productsData, setProductsData] = useState(initialProductsData);
+  const [loading, setLoading] = useState(false);
+
+  // Listen for search events
+  useEffect(() => {
+    const handleSearch = async (event: CustomEvent) => {
+      const { query } = event.detail;
+      await fetchProducts(query, searchParams?.status);
+    };
+
+    window.addEventListener('productSearch', handleSearch as EventListener);
+    return () => {
+      window.removeEventListener('productSearch', handleSearch as EventListener);
+    };
+  }, [searchParams?.status]);
+
+  // Fetch products with search query
+  const fetchProducts = async (searchQuery?: string, status?: string) => {
+    setLoading(true);
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api';
+      const page = parseInt(searchParams?.page || '1', 10);
+      const limit = 10;
+      
+      // Build query string
+      const queryParams = new URLSearchParams();
+      queryParams.set('page', page.toString());
+      queryParams.set('limit', limit.toString());
+      
+      if (searchQuery) {
+        queryParams.set('search', searchQuery);
+      }
+      
+      if (status) {
+        queryParams.set('status', status);
+      }
+      
+      const url = `${baseUrl}/products?${queryParams.toString()}`;
+      
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        setProductsData(data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch products:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleEdit = (product: Product) => {
     console.log("Edit product", product);
@@ -116,23 +172,26 @@ const ProductsDataTable = ({ productsData }: ProductsDataTableProps) => {
   ];
 
   const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(urlSearchParams);
     params.set("page", page.toString());
     router.push(`?${params.toString()}`);
   };
 
   return (
-    <DataTable<Product>
-      data={productsData.data}
-      columns={columns}
-      renderActions={renderActions}
-      pagination={{
-        currentPage: productsData.page,
-        totalPages: productsData.totalPages,
-        totalItems: productsData.total,
-        onPageChange: handlePageChange,
-      }}
-    />
+    <div>
+      {loading && <div className="mb-4">Searching...</div>}
+      <DataTable<Product>
+        data={productsData.data}
+        columns={columns}
+        renderActions={renderActions}
+        pagination={{
+          currentPage: productsData.page,
+          totalPages: productsData.totalPages,
+          totalItems: productsData.total,
+          onPageChange: handlePageChange,
+        }}
+      />
+    </div>
   );
 };
 

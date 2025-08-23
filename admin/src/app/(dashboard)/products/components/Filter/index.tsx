@@ -27,9 +27,9 @@ const ProductsFilter = ({ searchParams }: ProductsFilterProps) => {
   }, [searchParams]);
 
   const handleSearch = (query: string) => {
-    // For the filter component, we want to update the URL immediately when the user searches
-    applyFilters({ search: query });
-  };
+		// Update local state but don't apply filters yet for real-time search
+		setSearchQuery(query);
+	};
 
   const applyFilters = (filters: { 
     search?: string; 
@@ -79,57 +79,55 @@ const ProductsFilter = ({ searchParams }: ProductsFilterProps) => {
   };
 
   const handleResetFilters = () => {
-    setSearchQuery("");
-    setSelectedStatus("");
-    const params = new URLSearchParams(urlSearchParams);
-    params.delete("search");
-    params.delete("status");
-    params.set("page", "1");
-    router.push(`?${params.toString()}`);
-    
-    // Revalidate products cache
-    revalidateProducts();
-  };
+		setSearchQuery("");
+		setSelectedStatus("");
+		const params = new URLSearchParams(urlSearchParams);
+		params.delete("search");
+		params.delete("status");
+		params.set("page", "1");
+		router.push(`?${params.toString()}`);
 
-  return (
-    <div className="flex flex-col lg:flex-row gap-4 mb-6">
-      <div className="form-control me-auto w-80">
-        <SearchInput
-          onSearch={handleSearch}
-          placeholder="Search products, posts, customers..."
-          localStorageKey="products-search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
-      <div className="flex gap-2">
-        <select 
-          className="select select-bordered"
-          value={selectedStatus}
-          onChange={handleStatusChange}
-        >
-          <option value="">All Status</option>
-          <option value="available">Available</option>
-          <option value="out_of_stock">Out of Stock</option>
-        </select>
-        <button 
-          className="btn btn-outline"
-          onClick={handleFilterClick}
-        >
-          <FunnelIcon className="h-5 w-5" />
-          Filter
-        </button>
-        {(searchQuery || selectedStatus) && (
-          <button 
-            className="btn btn-ghost"
-            onClick={handleResetFilters}
-          >
-            Reset
-          </button>
-        )}
-      </div>
-    </div>
-  );
+		// Revalidate products cache
+		revalidateProducts();
+		// Notify parent component about search changes for real-time filtering
+		const event = new CustomEvent("productSearch", { detail: { query: "" } });
+		window.dispatchEvent(event);
+	};
+
+	return (
+		<div className="flex flex-col lg:flex-row gap-4 mb-6">
+			<div className="form-control me-auto w-80">
+				<SearchInput
+					onSearch={handleSearch}
+					placeholder="Search products, posts, customers..."
+					localStorageKey="products-search"
+					value={searchQuery}
+					onChange={e => setSearchQuery(e.target.value)}
+					enableUrlUpdate={false} // Disable URL updates for real-time search
+				/>
+			</div>
+			<div className="flex gap-2">
+				<select
+					className="select select-bordered"
+					value={selectedStatus}
+					onChange={handleStatusChange}
+				>
+					<option value="">All Status</option>
+					<option value="available">Available</option>
+					<option value="out_of_stock">Out of Stock</option>
+				</select>
+				<button className="btn btn-outline" onClick={handleFilterClick}>
+					<FunnelIcon className="h-5 w-5" />
+					Filter
+				</button>
+				{(searchQuery || selectedStatus) && (
+					<button className="btn btn-ghost" onClick={handleResetFilters}>
+						Reset
+					</button>
+				)}
+			</div>
+		</div>
+	);
 };
 
 export default ProductsFilter;

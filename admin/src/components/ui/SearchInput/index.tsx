@@ -10,6 +10,7 @@ interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   localStorageKey?: string;
   debounceDelay?: number;
+  enableUrlUpdate?: boolean; // New prop to control URL updates
 }
 
 /**
@@ -28,13 +29,31 @@ const SearchInput = ({
   placeholder = "Search...",
   localStorageKey = "recentSearches",
   debounceDelay = 300,
+  enableUrlUpdate = true, // Default to true to maintain backward compatibility
   className = "",
   ...rest
 }: SearchInputProps) => {
   const [query, setQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [recentSearches, setRecentSearches] = useLocalStorage<string[]>(localStorageKey, []);
+  const debouncedQuery = useDebounce(query, debounceDelay);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Trigger search when debounced query changes (only if URL updates are enabled)
+  useEffect(() => {
+    if (enableUrlUpdate && debouncedQuery.trim() !== "") {
+      onSearch(debouncedQuery);
+      
+      // Add to recent searches if not already present
+      setRecentSearches(prev => {
+        const filtered = prev.filter(item => item !== debouncedQuery);
+        return [debouncedQuery, ...filtered].slice(0, 5); // Keep only last 5
+      });
+    } else if (enableUrlUpdate && debouncedQuery === "") {
+      // Clear search when query is empty
+      onSearch("");
+    }
+  }, [debouncedQuery, onSearch, setRecentSearches, enableUrlUpdate]);
 
   // Handle Enter key submission
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

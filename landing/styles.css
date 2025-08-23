@@ -1,0 +1,163 @@
+/* Custom styles for the page */
+body {
+	font-family: "Inter", sans-serif;
+}
+
+/* Animation for the outer orbit rotation */
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.orbit {
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+.orbit-inner {
+	z-index: 20;
+}
+
+.orbit-outer {
+	/* Adjust size for different screen sizes */
+	width: 600px;
+	height: 600px;
+	margin-top: -300px;
+	margin-left: -300px;
+	animation: rotate 60s linear infinite;
+}
+
+@media (min-width: 1024px) {
+	.orbit-outer {
+		width: 1000px;
+		height: 1000px;
+		margin-top: -500px;
+		margin-left: -500px;
+	}
+}
+
+.orbit-inner {
+	/* Adjust size for different screen sizes */
+	width: 450px;
+	height: 450px;
+	margin-top: -225px;
+	margin-left: -225px;
+}
+
+@media (min-width: 1024px) {
+	.orbit-inner {
+		width: 650px;
+		height: 650px;
+		margin-top: -350px;
+		margin-left: -350px;
+	}
+}
+
+.icon-container {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	background-color: rgba(244, 239, 239, 0.5);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 99px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	padding: 0.5rem 1rem;
+	color: white;
+	animation: rotate 60s linear infinite reverse; /* Counter-rotation to keep icons upright */
+}
+
+.icon-container svg {
+	margin-inline-start: 0.5rem;
+}
+
+/* Specific positioning for each icon on the outer orbit */
+/* Positions are calculated using transform: rotate() then translate() */
+/* Example for one icon: transform: rotate(45deg) translate(400px) rotate(-45deg); */
+/* The outer translate value should be half the orbit's width/height */
+.icon-1 {
+	top: 7%;
+	left: 10%;
+	transform: translate(-50%, -50%) rotate(45deg)
+		translate(calc(clamp(300px, 40vw, 400px))) rotate(-45deg);
+}
+.icon-2 {
+	top: 13%;
+	left: 80%;
+	transform: translate(-50%, -50%) rotate(135deg)
+		translate(calc(clamp(300px, 40vw, 400px))) rotate(-135deg);
+}
+.icon-3 {
+	top: 70%;
+	left: 86%;
+	transform: translate(-50%, -50%) rotate(225deg)
+		translate(calc(clamp(300px, 40vw, 400px))) rotate(-225deg);
+}
+.icon-4 {
+	top: 97%;
+	left: 50%;
+	transform: translate(-50%, -50%) rotate(315deg)
+		translate(calc(clamp(300px, 40vw, 400px))) rotate(-315deg);
+}
+
+.icon-5 {
+	top: 39%;
+	left: -8%;
+	transform: translate(-50%, -50%) rotate(315deg)
+		translate(calc(clamp(300px, 40vw, 400px))) rotate(-315deg);
+}
+
+.icon-6 {
+	top: 84%;
+	left: 6%;
+	transform: translate(-50%, -50%) rotate(315deg)
+		translate(calc(clamp(300px, 40vw, 400px))) rotate(-315deg);
+}
+
+/* Positioning for static icons on the inner orbit */
+.static-icon-container {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(30, 30, 42, 0.5);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 9999px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	padding: 0.5rem;
+	color: white;
+}
+.static-icon-1 {
+	top: 100%;
+	left: 50%;
+	transform: translate(-100%, -50%);
+}
+.static-icon-2 {
+	top: 100%;
+	left: 50%;
+	transform: translate(0%, -50%);
+}
+
+/* Subtle background glow */
+.glow-bg::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 800px;
+	height: 100vh;
+	background: radial-gradient(circle, rgba(168, 85, 247, 0.1), transparent 60%);
+	transform: translate(-50%, -50%);
+	z-index: -1;
+	pointer-events: none;
+}
