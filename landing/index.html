@@ -36,9 +36,9 @@
 	<body class="bg-[#111118] text-white glow-bg">
 		<!-- Main Content Container -->
 		<main
-			class="relative flex items-center justify-center w-full h-full min-h-screen overflow-hidden"
+			class="relative flex md:items-center md:justify-center w-full h-full min-h-screen overflow-hidden"
 		>
-			<section class="z-10 text-center flex flex-col items-center">
+			<section class="z-10 text-center flex flex-col items-center gap-2 mx-4">
 				<!-- Orbits -->
 				<div class="orbit orbit-inner">
 					<!-- Static Bottom Icons -->
@@ -51,8 +51,7 @@
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								fill="#ffffff"
-								width="32px"
-								height="32px"
+
 								viewBox="0 0 24 24"
 							>
 								<g id="SVGRepo_bgCarrier" stroke-width="0" />
@@ -81,8 +80,8 @@
 								xmlns="http://www.w3.org/2000/svg"
 								xmlns:xlink="http://www.w3.org/1999/xlink"
 								fill="#ffffff"
-								height="32px"
-								width="32px"
+
+
 								version="1.1"
 								id="Layer_1"
 								viewBox="-143 145 512 512"
@@ -113,8 +112,8 @@
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 48 48"
-							width="32px"
-							height="32px"
+
+
 							fill-rule="evenodd"
 							clip-rule="evenodd"
 						>
@@ -147,8 +146,8 @@
 						<!-- TikTok Icon -->
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							width="32px"
-							height="32px"
+
+
 							viewBox="0 0 32 32"
 							fill="none"
 						>
@@ -180,8 +179,6 @@
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							xmlns:xlink="http://www.w3.org/1999/xlink"
-							width="32px"
-							height="32px"
 							viewBox="0 0 32 32"
 							id="Camada_1"
 							version="1.1"
@@ -208,8 +205,6 @@
 						<!-- Online Store Icon -->
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							width="32px"
-							height="32px"
 							viewBox="-5.5 0 48 48"
 						>
 							<g id="_23" data-name="23" transform="translate(-688 -600.466)">
@@ -233,8 +228,6 @@
 						<!-- LinkedIn Icon -->
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							width="32px"
-							height="32px"
 							viewBox="0 0 256 256"
 						>
 							<g fill="none">
@@ -258,8 +251,6 @@
 							xmlns="http://www.w3.org/2000/svg"
 							xmlns:xlink="http://www.w3.org/1999/xlink"
 							fill="#000000"
-							height="32px"
-							width="32px"
 							version="1.1"
 							id="Layer_1"
 							viewBox="0 0 512 512"
@@ -285,18 +276,18 @@
 				</div>
 
 				<!-- Central Text Content -->
-				<h1 class="text-2xl md:text-4xl xl:text-6xl font-extrabold tracking-tight z-20">
+				<h1 class="text-4xl mt-4 md:mt-0 md:text-2xl xl:text-6xl font-extrabold tracking-tight z-20">
 					One Link.
 				</h1>
 
 				<h1
-					class="text-2xl md:text-4xl xl:text-6xl font-extrabold tracking-tighter flex items-center z-20"
+					class="text-4xl md:text-2xl xl:text-6xl font-extrabold tracking-tighter flex items-center z-20"
 				>
 					Share. Grow.
 				</h1>
 
 				<div
-					class="flex items-center bg-white/90 w-48 h-16 rounded-lg px-4 my-4 z-20"
+					class="flex items-center bg-white/90 w-52 h-12 md:w-40 md:h-12 lg:w-48 lg:h-16 xl:w-64 xl:h-20 rounded-lg px-4 my-4 z-20"
 				>
 					<img
 						src="./assets/onelynk-logo-transparent.png"
@@ -305,14 +296,14 @@
 					/>
 				</div>
 
-				<p class="max-w-md text-gray-400 text-base z-20">
+				<p class="max-w-md text-gray-400 text-base md:text-sm lg:text-base z-20">
 					<strong class="text-white">Stop losing sales</strong> in DMs and messy
 					links. OneLynk brings all your products, services, and payments
 					together in one simple, professional link — so customers can find,
 					trust, and buy from you instantly.
 				</p>
 
-				<p class="max-w-md text-gray-400 text-base mt-2 z-20">
+				<p class="max-w-md text-gray-400 text-base md:text lg:text-base mt-2 z-20">
 					Built for
 					<strong class="text-white"
 						>freelancers, creators, and small business owners</strong
@@ -323,18 +314,19 @@
 				<!-- Email Form -->
 				<form class="mt-4 w-full max-w-md z-20">
 					<div
-						class="relative bg-[#1E1E2A] p-2 rounded-full flex items-center border border-gray-700"
+						class="relative bg-[#1E1E2A] p-1 lg:p-2 rounded-full flex items-center border border-gray-700"
 					>
 						<input
 							type="email"
 							name="email"
+							autocomplete="on"
 							placeholder="designer@example.com"
 							required
 							class="w-full bg-transparent text-white placeholder-gray-500 pl-4 pr-40 focus:outline-none"
 						/>
 						<button
 							type="submit"
-							class="absolute right-1 top-1/2 transform -translate-y-1/2 bg-white text-black font-semibold px-6 py-2 rounded-r-full hover:bg-gray-200 transition-colors duration-300"
+							class="absolute right-1 text-sm lg:text-base top-1/2 transform -translate-y-1/2 bg-white text-black font-semibold px-4 py-1 lg:px-6 lg:py-2 rounded-r-full hover:bg-gray-200 transition-colors duration-300"
 						>
 							Get Your OneLynk Free
 						</button>

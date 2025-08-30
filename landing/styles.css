@@ -16,9 +16,14 @@ body {
 .orbit {
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	border-radius: 50%;
-	position: absolute;
-	top: 50%;
-	left: 50%;
+}
+
+@media (min-width: 768px) {
+	.orbit {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+	}
 }
 
 .orbit-inner {
@@ -27,13 +32,20 @@ body {
 
 .orbit-outer {
 	/* Adjust size for different screen sizes */
-	width: 600px;
-	height: 600px;
-	margin-top: -300px;
-	margin-left: -300px;
-	animation: rotate 60s linear infinite;
+
+	display: none;
 }
 
+@media (min-width: 768px) {
+	.orbit-outer {
+		display: block;
+		width: 600px;
+		height: 600px;
+		margin-top: -300px;
+		margin-left: -300px;
+		animation: rotate 60s linear infinite;
+	}
+}
 
 @media (min-width: 1024px) {
 	.orbit-outer {
@@ -54,11 +66,7 @@ body {
 }
 
 .orbit-inner {
-	/* Adjust size for different screen sizes */
-	width: 450px;
-	height: 450px;
-	margin-top: -225px;
-	margin-left: -225px;
+	display: none;
 }
 
 @media (min-width: 1024px) {
@@ -93,6 +101,30 @@ body {
 	padding: 0.5rem 1rem;
 	color: white;
 	animation: rotate 60s linear infinite reverse; /* Counter-rotation to keep icons upright */
+}
+
+@media (min-width: 768px) {
+	.icon-container {
+		gap: 0.25rem;
+		padding: 0.25rem 0.5rem;
+	}
+
+	.icon-container svg {
+		width: 1.5rem;
+		height: 1.5rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.icon-container {
+		gap: 0.5rem;
+		padding: 0.5rem 1rem;
+	}
+
+	.icon-container svg {
+		width: 2rem;
+		height: 2rem;
+	}
 }
 
 .icon-container svg {
@@ -156,6 +188,21 @@ body {
 	padding: 0.5rem;
 	color: white;
 }
+
+@media (min-width: 768px) {
+	.static-icon-container svg {
+		width: 1.5rem;
+		height: 1.5rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.static-icon-container svg {
+		width: 2rem;
+		height: 2rem;
+	}
+}
+
 .static-icon-1 {
 	top: 100%;
 	left: 50%;
@@ -167,16 +214,22 @@ body {
 	transform: translate(0%, -50%);
 }
 
-/* Subtle background glow */
-.glow-bg::before {
-	content: "";
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 800px;
-	height: 100vh;
-	background: radial-gradient(circle, rgba(168, 85, 247, 0.1), transparent 60%);
-	transform: translate(-50%, -50%);
-	z-index: -1;
-	pointer-events: none;
+@media (min-width: 768px) {
+	/* Subtle background glow */
+	.glow-bg::before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 800px;
+		height: 100vh;
+		background: radial-gradient(
+			circle,
+			rgba(168, 85, 247, 0.1),
+			transparent 60%
+		);
+		transform: translate(-50%, -50%);
+		z-index: -1;
+		pointer-events: none;
+	}
 }
